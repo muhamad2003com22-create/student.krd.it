@@ -1,4 +1,4 @@
-const CACHE_NAME = 'school-assistant-v1';
+const CACHE_NAME = 'school-assistant-v2';
 const ASSETS_TO_CACHE = [
     './',
     './index.html',
@@ -12,6 +12,7 @@ const ASSETS_TO_CACHE = [
 ];
 
 self.addEventListener('install', (event) => {
+    self.skipWaiting(); // Force new service worker to activate immediately
     event.waitUntil(
         caches.open(CACHE_NAME)
             .then((cache) => cache.addAll(ASSETS_TO_CACHE))
@@ -26,19 +27,20 @@ self.addEventListener('fetch', (event) => {
     // Don't intercept API calls to Gemini
     if (event.request.url.includes('generativelanguage.googleapis.com')) return;
 
+    // Network-First Strategy
     event.respondWith(
-        caches.match(event.request)
-            .then((response) => {
-                // Return cached version or fetch from network
-                return response || fetch(event.request).then(fetchRes => {
-                    return caches.open(CACHE_NAME).then(cache => {
-                        // Cache the newly fetched file
-                        if (fetchRes.status === 200) {
-                            cache.put(event.request.url, fetchRes.clone());
-                        }
-                        return fetchRes;
-                    });
-                });
+        fetch(event.request)
+            .then((networkResponse) => {
+                // Update cache with new response
+                if (networkResponse && networkResponse.status === 200) {
+                    const responseClone = networkResponse.clone();
+                    caches.open(CACHE_NAME).then((cache) => cache.put(event.request, responseClone));
+                }
+                return networkResponse;
+            })
+            .catch(() => {
+                // If network fails, try cache
+                return caches.match(event.request);
             })
     );
 });
