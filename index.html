@@ -113,10 +113,6 @@
                     <i class="ti ti-brand-telegram" style="font-size: 22px;"></i>
                     <span>جۆینی تێلیگرام</span>
                 </a>
-                <button id="btn-settings-trigger" class="footer-btn" style="display: none;">
-                    <i class="ti ti-settings"></i>
-                    <span data-key="settings-title">ڕێکخستنی کلیل</span>
-                </button>
             </div>
         </aside>
 
@@ -126,10 +122,6 @@
             <header class="top-bar">
                 <div class="hamburger-menu" id="hamburger">
                     <i class="ti ti-menu-2"></i>
-                </div>
-                <div class="status-indicator-container" style="display: none;">
-                    <span class="status-dot red" id="status-dot"></span>
-                    <span id="status-text" data-key="status-no-key">کلیلی Gemini دیاری نەکراوە</span>
                 </div>
                 <div class="header-actions">
                     <!-- Theme Switcher Button -->
@@ -670,43 +662,6 @@
         </main>
     </div>
 
-    <!-- API Key Settings Modal -->
-    <div class="modal-overlay" id="settings-modal">
-        <div class="modal-box">
-            <div class="modal-header">
-                <h3><i class="ti ti-key"></i> <span data-key="modal-title">ڕێکخستنی کلیلی Gemini API</span></h3>
-                <button class="close-modal" id="btn-close-modal"><i class="ti ti-x"></i></button>
-            </div>
-            <div class="modal-body">
-                <p data-key="modal-desc">بۆ بەکارهێنانی ئەم بەرنامەیە پێویستە کلیلێکی خۆڕایی Gemini API بەدەستبهێنیت و لێرەدا پەیستی بکەیت:</p>
-                
-                <div class="form-group">
-                    <label for="gemini-api-key">API Key:</label>
-                    <div class="input-with-icon">
-                        <i class="ti ti-key"></i>
-                        <input type="password" id="gemini-api-key" placeholder="AIzaSy...">
-                        <button type="button" id="btn-toggle-key-visibility" class="btn-toggle-visibility">
-                            <i class="ti ti-eye"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="help-box">
-                    <h4 data-key="modal-help-title">چۆن کلیلەکە بەدەست بهێنم؟</h4>
-                    <ol>
-                        <li><span data-key="modal-help-step1">سەردانی ماڵپەڕی</span> <a href="https://aistudio.google.com/" target="_blank" rel="noopener">Google AI Studio <i class="ti ti-external-link"></i></a> <span data-key="modal-help-step1-2">بکە.</span></li>
-                        <li data-key="modal-help-step2">بە هەژماری Google (Gmail) خۆت بچۆ ژوورەوە.</li>
-                        <li data-key="modal-help-step3">کلیك بکە لەسەر دوگمەی "Get API Key" و پاشان یەکێک دروست بکە.</li>
-                        <li data-key="modal-help-step4">کۆپی بکە و لێرە پەیستی بکە.</li>
-                    </ol>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" id="btn-cancel-settings" data-key="modal-cancel">پاشگەزبوونەوە</button>
-                <button class="btn btn-primary" id="btn-save-settings" data-key="modal-save">خەزنکردن</button>
-            </div>
-        </div>
-    </div>
 
     <!-- Notification Toast -->
     <div id="toast" class="toast hidden"></div>
