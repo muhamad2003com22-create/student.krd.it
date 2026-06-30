@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>خوێندکار - Student</title>
+    <!-- Google Fonts: Vazirmatn for Kurdish, Plus Jakarta Sans for English -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Tabler Icons CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+    <!-- Mermaid JS for Mind Maps -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js" defer></script>
+    
+    <!-- PWA Settings & Favicon -->
+    <link rel="icon" type="image/svg+xml" href="icon-192.svg">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#8b5cf6">
+    <link rel="apple-touch-icon" href="icon-192.svg">
+    
+    <!-- Main Style -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-theme">
+    <!-- Background Glow Elements -->
+    <div class="glow-bg">
+        <div class="glow-sphere sphere-1"></div>
+        <div class="glow-sphere sphere-2"></div>
+    </div>
+
+    <!-- App Wrapper -->
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-area">
+                    <a href="https://t.me/IT_Kurd0" target="_blank" class="logo-icon" style="text-decoration: none; cursor: pointer;">
+                        <i class="ti ti-brand-telegram"></i>
+                    </a>
+                    <div class="logo-text">
+                        <h1 id="app-title">خوێندکار</h1>
+                        <span id="app-subtitle">ژیریی دەستکرد بۆ خوێندکاران</span>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="nav-menu">
+                <button class="nav-item active" data-tab="summarize">
+                    <i class="ti ti-notes"></i>
+                    <span data-key="nav-summarize">کورتکردنەوەی بابەت</span>
+                </button>
+                <button class="nav-item" data-tab="exam">
+                    <i class="ti ti-file-certificate"></i>
+                    <span data-key="nav-exam">وەڵامدانەوەی پرسیارەکان</span>
+                </button>
+                <button class="nav-item" data-tab="pdf">
+                    <i class="ti ti-file-text"></i>
+                    <span data-key="nav-pdf">ڕوونکردنەوەی PDF</span>
+                </button>
+                <button class="nav-item" data-tab="math">
+                    <i class="ti ti-math-function"></i>
+                    <span data-key="nav-math">شیکاری بیرکاری</span>
+                </button>
+                <button class="nav-item" data-tab="flashcards">
+                    <i class="ti ti-cards"></i>
+                    <span data-key="nav-flashcards">فلاشکارد (کارتی زیرەک)</span>
+                </button>
+                <button class="nav-item" data-tab="grammar">
+                    <i class="ti ti-writing"></i>
+                    <span data-key="nav-grammar">پشکنەری ڕێنووس</span>
+                </button>
+                <button class="nav-item" data-tab="mindmap">
+                    <i class="ti ti-schema"></i>
+                    <span data-key="nav-mindmap">نەخشەی مێشک</span>
+                </button>
+                <button class="nav-item" data-tab="planner">
+                    <i class="ti ti-calendar-stats"></i>
+                    <span data-key="nav-planner">خشتەی خوێندن</span>
+                </button>
+                <button class="nav-item" data-tab="tutor">
+                    <i class="ti ti-language-hiragana"></i>
+                    <span data-key="nav-tutor">ڕاهێنەری زمان</span>
+                </button>
+                <button class="nav-item" data-tab="translate">
+                    <i class="ti ti-language"></i>
+                    <span data-key="nav-translate">وەرگێڕان</span>
+                </button>
+                <button class="nav-item" data-tab="focus">
+                    <i class="ti ti-clock-stop"></i>
+                    <span data-key="nav-focus">کاتی سەنجدان</span>
+                </button>
+                <button class="nav-item" data-tab="quiz">
+                    <i class="ti ti-device-gamepad-2"></i>
+                    <span data-key="nav-quiz">یاری و کویز</span>
+                </button>
+                <button class="nav-item" data-tab="career">
+                    <i class="ti ti-compass"></i>
+                    <span data-key="nav-career">ڕێنماییکاری زانکۆ</span>
+                </button>
+                <button class="nav-item" data-tab="code">
+                    <i class="ti ti-code"></i>
+                    <span data-key="nav-code">یاریدەدەری کۆد</span>
+                </button>
+                <button class="nav-item" data-tab="info">
+                    <i class="ti ti-info-circle"></i>
+                    <span data-key="nav-info">ڕێنمایی و دەربارە</span>
+                </button>
+            </nav>
+
+            <div class="sidebar-footer" style="padding: 15px;">
+                <a href="https://t.me/IT_Kurd0" target="_blank" style="display: flex; align-items: center; justify-content: center; gap: 10px; background: var(--accent-gradient); color: white; text-decoration: none; padding: 12px; border-radius: var(--radius-md); font-weight: bold; transition: var(--transition);">
+                    <i class="ti ti-brand-telegram" style="font-size: 22px;"></i>
+                    <span>جۆینی تێلیگرام</span>
+                </a>
+                <button id="btn-settings-trigger" class="footer-btn" style="display: none;">
+                    <i class="ti ti-settings"></i>
+                    <span data-key="settings-title">ڕێکخستنی کلیل</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Header bar -->
+            <header class="top-bar">
+                <div class="hamburger-menu" id="hamburger">
+                    <i class="ti ti-menu-2"></i>
+                </div>
+                <div class="status-indicator-container" style="display: none;">
+                    <span class="status-dot red" id="status-dot"></span>
+                    <span id="status-text" data-key="status-no-key">کلیلی Gemini دیاری نەکراوە</span>
+                </div>
+                <div class="header-actions">
+                    <!-- Theme Switcher Button -->
+                    <button id="theme-switch" class="btn btn-secondary">
+                        <i class="ti ti-sun" id="theme-icon"></i>
+                    </button>
+                    <!-- Language Switcher Button -->
+                    <button id="lang-switch" class="btn btn-secondary">
+                        <i class="ti ti-language"></i>
+                        <span>English</span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Active Tab Container -->
+            <div class="tab-content-container">
+                <!-- Tab: Summarize -->
+                <section id="tab-summarize" class="tab-pane active">
+                    <div class="pane-header">
+                        <h2 data-key="sum-title">کورتکردنەوەی بابەتی خوێندن</h2>
+                        <p data-key="sum-desc">وێنەی لاپەڕەی کتێب، دەفتەر یان نووسینێک بنێرە بۆ ئەوەی خێرا کورت بکرێتەوە و گرنگترین خاڵەکانی لێ دەربهێنرێت.</p>
+                    </div>
+
+                    <div class="input-section">
+                        <!-- Custom File Upload Zone -->
+                        <div class="upload-zone" id="upload-zone-summarize">
+                            <input type="file" id="file-summarize" accept="image/*" class="file-input">
+                            <div class="upload-content">
+                                <i class="ti ti-cloud-upload"></i>
+                                <h3 data-key="upload-prompt">وێنەی بابەتەکە لێرە دابنێ یان کلیك بکە</h3>
+                                <p data-key="upload-hint">پشتگیری لە وێنە دەکات (PNG, JPG, WEBP)</p>
+                            </div>
+                            <div class="preview-zone hidden">
+                                <img src="" alt="Preview" class="image-preview">
+                                <button class="btn btn-danger btn-remove-file"><i class="ti ti-trash"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- Text prompt addition -->
+                        <div class="prompt-addons">
+                            <label for="text-summarize-addon" data-key="addon-label">تێبینی زیاتر یان پرسیاری تایبەت (ئارەزوومەندانە):</label>
+                            <div class="input-with-mic">
+                                <textarea id="text-summarize-addon" placeholder="بۆ نموونە: تەنها بە کوردییەکی زۆر سادە کورت بکەرەوە..." rows="2"></textarea>
+                                <button class="btn-mic" type="button" title="Voice Input"><i class="ti ti-microphone"></i></button>
+                            </div>
+                        </div>
+
+                        <button id="btn-generate-summarize" class="btn btn-primary btn-action">
+                            <i class="ti ti-sparkles"></i>
+                            <span data-key="btn-summarize">کورت بکەرەوە</span>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Tab: Exam -->
+                <section id="tab-exam" class="tab-pane">
+                    <div class="pane-header">
+                        <h2 data-key="exam-title">وەڵامدانەوەی پرسیارەکانی تاقیکردنەوە</h2>
+                        <p data-key="exam-desc">وێنەی وەرەقەی تاقیکردنەوە، پرسیارەکان یان کویزەکان بنێرە بۆ ئەوەی وەڵامی دروست لەگەڵ ڕوونکردنەوەی تەواو بەدەست بهێنیت.</p>
+                    </div>
+
+                    <div class="input-section">
+                        <div class="upload-zone" id="upload-zone-exam">
+                            <input type="file" id="file-exam" accept="image/*" class="file-input">
+                            <div class="upload-content">
+                                <i class="ti ti-clipboard-list"></i>
+                                <h3 data-key="upload-prompt-exam">وێنەی وەرەقەی پرسیارەکان لێرە دابنێ</h3>
+                                <p data-key="upload-hint">پشتگیری لە وێنە دەکات (PNG, JPG, WEBP)</p>
+                            </div>
+                            <div class="preview-zone hidden">
+                                <img src="" alt="Preview" class="image-preview">
+                                <button class="btn btn-danger btn-remove-file"><i class="ti ti-trash"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="prompt-addons">
+                            <label for="text-exam-addon" data-key="exam-addon-label">ڕێنمایی زیاتر (ئارەزوومەندانە):</label>
+                            <div class="input-with-mic">
+                                <textarea id="text-exam-addon" placeholder="بۆ نموونە: تەنها وەڵامەکانم بۆ بنووسە بەبێ درێژکردنەوە..." rows="2"></textarea>
+                                <button class="btn-mic" type="button" title="Voice Input"><i class="ti ti-microphone"></i></button>
+                            </div>
+                        </div>
+
+                        <button id="btn-generate-exam" class="btn btn-primary btn-action">
+                            <i class="ti ti-sparkles"></i>
+                            <span data-key="btn-solve">پرسیارەکان وەڵام بدەرەوە</span>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Tab: PDF Explainer -->
+                <section id="tab-pdf" class="tab-pane">
+                    <div class="pane-header">
+                        <h2 data-key="pdf-title">کورتکردنەوە و شیتاڵکردنی فایلی PDF</h2>
+                        <p data-key="pdf-desc">فایلی PDFی وانەکە بنێرە تا بتوانێت بۆت کورت بکاتەوە، خاڵە گرنگەکان دەربهێنێت یان پرسیارت لە لاپەڕەکانی هەبێت وەڵامت بداتەوە.</p>
+                    </div>
+
+                    <div class="input-section">
+                        <div class="upload-zone" id="upload-zone-pdf">
+                            <input type="file" id="file-pdf" accept="application/pdf" class="file-input">
+                            <div class="upload-content">
+                                <i class="ti ti-file-type-pdf"></i>
+                                <h3 data-key="upload-prompt-pdf">فایلی PDF لێرە دابنێ یان کلیك بکە</h3>
+                                <p data-key="upload-hint-pdf">پشتگیری لە فایلی PDF دەکات (تاوەکو ١٥ مێگابایت)</p>
+                            </div>
+                            <div class="preview-zone hidden">
+                                <div class="pdf-preview-box">
+                                    <i class="ti ti-file-text pdf-icon"></i>
+                                    <span class="pdf-file-name" id="pdf-name">document.pdf</span>
+                                </div>
+                                <button class="btn btn-danger btn-remove-file"><i class="ti ti-trash"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="prompt-addons">
+                            <label for="text-pdf-addon" data-key="pdf-addon-label">چی لە فایلەکە بکەم؟ (ئارەزوومەندانە):</label>
+                            <div class="input-with-mic">
+                                <textarea id="text-pdf-addon" placeholder="بۆ نموونە: سەرجەم خاڵە سەرەکییەکان و وادەکانی مێژوو دەربهێنە بە شێوەی خشتە..." rows="2"></textarea>
+                                <button class="btn-mic" type="button" title="Voice Input"><i class="ti ti-microphone"></i></button>
+                            </div>
+                        </div>
+
+                        <button id="btn-generate-pdf" class="btn btn-primary btn-action">
+                            <i class="ti ti-sparkles"></i>
+                            <span data-key="btn-explain-pdf">فایلەکە شیکار بکە</span>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Tab: Math Solver -->
+                <section id="tab-math" class="tab-pane">
+                    <div class="pane-header">
+                        <h2 data-key="math-title">شیکارکاری بیرکاری و فیزیا</h2>
+                        <p data-key="math-desc">وێنەی پرسیارێکی بیرکاری یان فیزیا بنێرە بۆ ئەوەی بە هەنگاو بە هەنگاو شیکارییەکەی ببینیت.</p>
+                    </div>
+
+                    <div class="input-section">
+                        <div class="upload-zone" id="upload-zone-math">
+                            <input type="file" id="file-math" accept="image/*" class="file-input">
+                            <div class="upload-content">
+                                <i class="ti ti-math-symbols"></i>
+                                <h3 data-key="upload-prompt-math">وێنەی پرسیارەکە لێرە دابنێ</h3>
+                                <p data-key="upload-hint">پشتگیری لە وێنە دەکات (PNG, JPG, WEBP)</p>
+                            </div>
+                            <div class="preview-zone hidden">
+                                <img src="" alt="Preview" class="image-preview">
+                                <button class="btn btn-danger btn-remove-file"><i class="ti ti-trash"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="prompt-addons">
+                            <label for="text-math-addon" data-key="math-addon-label">تێبینی زیاتر (ئارەزوومەندانە):</label>
+                            <div class="input-with-mic">
+                                <textarea id="text-math-addon" placeholder="بۆ نموونە: تەنها یاساکانم بۆ ڕوون بکەرەوە..." rows="2"></textarea>
+                                <button class="btn-mic" type="button" title="Voice Input"><i class="ti ti-microphone"></i></button>
+                            </div>
+                        </div>
+
+                        <button id="btn-generate-math" class="btn btn-primary btn-action">
+                            <i class="ti ti-sparkles"></i>
+                            <span data-key="btn-solve-math">شیکار بکە</span>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Tab: Flashcards -->
+                <section id="tab-flashcards" class="tab-pane">
+                    <div class="pane-header">
+                        <h2 data-key="flashcards-title">دروستکەری فلاشکارد</h2>
+                        <p data-key="flashcards-desc">وێنەیەک یان فایلێک بنێرە بۆ ئەوەی پرسیار و وەڵامی گرنگی لێ دەربهێنێت و بە شێوەی کارتی زیرەک پیشانی بدات.</p>
+                    </div>
+
+                    <div class="input-section">
+                        <div class="upload-zone" id="upload-zone-flashcards">
+                            <input type="file" id="file-flashcards" accept="image/*,application/pdf" class="file-input">
+                            <div class="upload-content">
+                                <i class="ti ti-cards"></i>
+                                <h3 data-key="upload-prompt-flashcards">فایل یان وێنەکە لێرە دابنێ</h3>
+                                <p data-key="upload-hint-flashcards">پشتگیری لە وێنە و PDF دەکات (تا ١٥ مێگابایت)</p>
+                            </div>
+                            <div class="preview-zone hidden">
+                                <div class="pdf-preview-box" id="flashcards-pdf-preview" style="display:none;">
+                                    <i class="ti ti-file-text pdf-icon"></i>
+                                    <span class="pdf-file-name" id="flashcards-pdf-name">document.pdf</span>
+                                </div>
+                                <img src="" alt="Preview" class="image-preview" id="flashcards-image-preview" style="display:none;">
+                                <button class="btn btn-danger btn-remove-file"><i class="ti ti-trash"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="prompt-addons">
+                            <label for="text-flashcards-addon" data-key="flashcards-addon-label">ژمارەی کارتەکان یان بابەتەکە (ئارەزوومەندانە):</label>
+                            <div class="input-with-mic">
+                                <textarea id="text-flashcards-addon" placeholder="بۆ نموونە: ١٠ پرسیاری قورسم بۆ دروست بکە لەم بابەتە..." rows="2"></textarea>
+                                <button class="btn-mic" type="button" title="Voice Input"><i class="ti ti-microphone"></i></button>
+                            </div>
+                        </div>
+
+                        <button id="btn-generate-flashcards" class="btn btn-primary btn-action">
+                            <i class="ti ti-sparkles"></i>
+                            <span data-key="btn-generate-cards">کارتەکان دروست بکە</span>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Tab: Grammar -->
+                <section id="tab-grammar" class="tab-pane">
+                    <div class="pane-header">
+                        <h2 data-key="grammar-title">پشکنەری ڕێنووس و داڕشتن</h2>
+                        <p data-key="grammar-desc">وێنەیەکی دەستنووس یان دەقێک بنێرە بۆ ئەوەی هەڵە ڕێزمانییەکانیت بۆ ڕاست بکاتەوە و نمرەت پێ بدات.</p>
+                    </div>
+
+                    <div class="input-section">
+                        <div class="upload-zone" id="upload-zone-grammar">
+                            <input type="file" id="file-grammar" accept="image/*" class="file-input">
+                            <div class="upload-content">
+                                <i class="ti ti-writing"></i>
+                                <h3 data-key="upload-prompt-grammar">وێنەی نووسینەکەت لێرە دابنێ</h3>
+                                <p data-key="upload-hint">پشتگیری لە وێنە دەکات (PNG, JPG, WEBP)</p>
+                            </div>
+                            <div class="preview-zone hidden">
+                                <img src="" alt="Preview" class="image-preview">
+                                <button class="btn btn-danger btn-remove-file"><i class="ti ti-trash"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="prompt-addons">
+                            <label for="text-grammar-addon" data-key="grammar-addon-label">یان لێرە بینوسە (دەتوانیت مایک بەکاربهێنیت):</label>
+                            <div class="input-with-mic">
+                                <textarea id="text-grammar-addon" placeholder="بۆ نموونە: نووسینەکەم پێداچوونەوە بکە..." rows="3"></textarea>
+                                <button class="btn-mic" type="button" title="Voice Input"><i class="ti ti-microphone"></i></button>
+                            </div>
+                        </div>
+
+                        <button id="btn-generate-grammar" class="btn btn-primary btn-action">
+                            <i class="ti ti-sparkles"></i>
+                            <span data-key="btn-grammar">پێداچوونەوە بکە</span>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Tab: Mindmap -->
+                <section id="tab-mindmap" class="tab-pane">
+                    <div class="pane-header">
+                        <h2 data-key="mindmap-title">دروستکەری نەخشەی مێشک (Mind Map)</h2>
+                        <p data-key="mindmap-desc">بابەتێک یان وێنەیەک بنێرە بۆ ئەوەی بە شێوەی هێڵکاری و نەخشە بۆت ڕوون بکاتەوە.</p>
+                    </div>
+
+                    <div class="input-section">
+                        <div class="upload-zone" id="upload-zone-mindmap">
+                            <input type="file" id="file-mindmap" accept="image/*,application/pdf" class="file-input">
+                            <div class="upload-content">
+                                <i class="ti ti-schema"></i>
+                                <h3 data-key="upload-prompt-mindmap">وێنە یان فایلی بابەتەکە دابنێ</h3>
+                                <p data-key="upload-hint">پشتگیری لە وێنە و فایلی PDF دەکات</p>
+                            </div>
+                            <div class="preview-zone hidden">
+                                <div class="pdf-preview-box" id="mindmap-pdf-preview" style="display:none;">
+                                    <i class="ti ti-file-text pdf-icon"></i>
+                                    <span class="pdf-file-name" id="mindmap-pdf-name">document.pdf</span>
+                                </div>
+                                <img src="" alt="Preview" class="image-preview" id="mindmap-image-preview" style="display:none;">
+                                <button class="btn btn-danger btn-remove-file"><i class="ti ti-trash"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="prompt-addons">
+                            <label for="text-mindmap-addon" data-key="mindmap-addon-label">بابەتەکە لێرە بنووسە ئەگەر فایلت نییە:</label>
+                            <div class="input-with-mic">
+                                <textarea id="text-mindmap-addon" placeholder="بۆ نموونە: نەخشەی مێشک بۆ 'کرداری ڕۆشنەپێکهاتن' دروست بکە..." rows="2"></textarea>
+                                <button class="btn-mic" type="button" title="Voice Input"><i class="ti ti-microphone"></i></button>
+                            </div>
+                        </div>
+
+                        <button id="btn-generate-mindmap" class="btn btn-primary btn-action">
+                            <i class="ti ti-sparkles"></i>
+                            <span data-key="btn-mindmap">نەخشەکە دروست بکە</span>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Tab: Planner -->
+                <section id="tab-planner" class="tab-pane">
+                    <div class="pane-header">
+                        <h2 data-key="planner-title">دروستکەری خشتەی خوێندن</h2>
+                        <p data-key="planner-desc">کاتە بەتاڵەکانت و بابەتەکانت پێ بڵێ، خشتەیەکی ڕێکخراوت بۆ دروست دەکات.</p>
+                    </div>
+
+                    <div class="input-section">
+                        <div class="prompt-addons">
+                            <label for="text-planner-addon" data-key="planner-addon-label">زانیارییەکانت بنووسە یان بە دەنگ بیڵێ:</label>
+                            <div class="input-with-mic">
+                                <textarea id="text-planner-addon" placeholder="بۆ نموونە: ئەم هەفتەیە تاقیکردنەوەی بیرکاریم هەیە، ڕۆژی ٤ سەعاتم هەیە بۆ خوێندن، خشتەیەکم بۆ بکە..." rows="4"></textarea>
+                                <button class="btn-mic" type="button" title="Voice Input"><i class="ti ti-microphone"></i></button>
+                            </div>
+                        </div>
+
+                        <button id="btn-generate-planner" class="btn btn-primary btn-action">
+                            <i class="ti ti-sparkles"></i>
+                            <span data-key="btn-planner">خشتەکە دروست بکە</span>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Tab: Tutor -->
+                <section id="tab-tutor" class="tab-pane">
+                    <div class="pane-header">
+                        <h2 data-key="tutor-title">ڕاهێنەری زمان</h2>
+                        <p data-key="tutor-desc">بە ئینگلیزی یان زمانی تر قسەی لەگەڵ بکە، هەڵەکانت بۆ ڕاست دەکاتەوە و فێرت دەکات.</p>
+                    </div>
+
+                    <div class="input-section">
+                        <div class="prompt-addons">
+                            <label for="text-tutor-addon" data-key="tutor-addon-label">چی دەتەوێت فێر ببیت؟ (ئینگلیزی، عەرەبی...)</label>
+                            <div class="input-with-mic">
+                                <textarea id="text-tutor-addon" placeholder="بۆ نموونە: با بە ئینگلیزی گفتوگۆ بکەین لەسەر تەکنەلۆژیا..." rows="3"></textarea>
+                                <button class="btn-mic" type="button" title="Voice Input"><i class="ti ti-microphone"></i></button>
+                            </div>
+                        </div>
+
+                        <button id="btn-generate-tutor" class="btn btn-primary btn-action">
+                            <i class="ti ti-sparkles"></i>
+                            <span data-key="btn-tutor">دەستپێکردنی گفتوگۆ</span>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Tab: Translate -->
+                <section id="tab-translate" class="tab-pane">
+                    <div class="pane-header">
+                        <h2 data-key="translate-title">وەرگێڕی زیرەک</h2>
+                        <p data-key="translate-desc">هەر دەقێک یان زمانێک بنووسە، ڕاستەوخۆ وەریگێڕە بۆ کوردی، ئینگلیزی یان هەر زمانێکی تر.</p>
+                    </div>
+
+                    <div class="input-section">
+                        <div class="prompt-addons">
+                            <label for="text-translate-addon" data-key="translate-addon-label">دەقەکە بنووسە یان بە دەنگ بیڵێ:</label>
+                            <div class="input-with-mic">
+                                <textarea id="text-translate-addon" placeholder="بۆ نموونە: سڵاو، چۆنیت..." rows="4"></textarea>
+                                <button class="btn-mic" type="button" title="Voice Input"><i class="ti ti-microphone"></i></button>
+                            </div>
+                        </div>
+
+                        <button id="btn-generate-translate" class="btn btn-primary btn-action">
+                            <i class="ti ti-language"></i>
+                            <span data-key="btn-translate">وەرگێڕان</span>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Tab: Focus Mode -->
+                <section id="tab-focus" class="tab-pane">
+                    <div class="pane-header">
+                        <h2 data-key="focus-title">کاتی سەنجدان (Focus Mode)</h2>
+                        <p data-key="focus-desc">کاتی خوێندنەکەت ڕێکبخە و بە تەواوی سەنج بخەرە سەر بابەتەکانت.</p>
+                    </div>
+                    <div class="input-section" style="text-align:center; padding: 40px 20px;">
+                        <div class="timer-display" id="focus-timer-display" style="font-size: 64px; font-weight: 800; color: var(--accent-primary); margin-bottom: 20px;">25:00</div>
+                        <div class="timer-controls" style="display: flex; justify-content: center; gap: 15px; margin-bottom: 30px;">
+                            <button id="btn-timer-start" class="btn btn-primary"><i class="ti ti-player-play"></i> <span data-key="btn-start">دەستپێکردن</span></button>
+                            <button id="btn-timer-pause" class="btn btn-secondary" style="display:none;"><i class="ti ti-player-pause"></i> <span data-key="btn-pause">وەستان</span></button>
+                            <button id="btn-timer-reset" class="btn btn-danger"><i class="ti ti-refresh"></i> <span data-key="btn-reset">سەرلەنوێ</span></button>
+                        </div>
+                        <div class="timer-modes" style="display: flex; justify-content: center; gap: 10px;">
+                            <button id="btn-mode-pomodoro" class="btn btn-secondary active" style="font-size:12px;">پۆمۆدۆرۆ (٢٥ خولەک)</button>
+                            <button id="btn-mode-shortbreak" class="btn btn-secondary" style="font-size:12px;">پشووی کورت (٥ خولەک)</button>
+                            <button id="btn-mode-longbreak" class="btn btn-secondary" style="font-size:12px;">پشووی درێژ (١٥ خولەک)</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Tab: Quiz -->
+                <section id="tab-quiz" class="tab-pane">
+                    <div class="pane-header">
+                        <h2 data-key="quiz-title">یاری و کویز (Interactive Quizzes)</h2>
+                        <p data-key="quiz-desc">وانەکانت بکە بە یارییەکی خۆش و ڕاستەوخۆ تاقیکردنەوە بکە.</p>
+                    </div>
+                    <div class="input-section">
+                        <div class="upload-zone" id="upload-zone-quiz">
+                            <input type="file" id="file-quiz" accept="image/*,application/pdf" class="file-input">
+                            <div class="upload-content">
+                                <i class="ti ti-device-gamepad-2"></i>
+                                <h3 data-key="upload-prompt-quiz">وێنە یان فایلی بابەتەکە دابنێ</h3>
+                                <p data-key="upload-hint">پشتگیری لە وێنە و فایلی PDF دەکات</p>
+                            </div>
+                            <div class="preview-zone hidden">
+                                <div class="pdf-preview-box" id="quiz-pdf-preview" style="display:none;">
+                                    <i class="ti ti-file-text pdf-icon"></i>
+                                    <span class="pdf-file-name" id="quiz-pdf-name">document.pdf</span>
+                                </div>
+                                <img src="" alt="Preview" class="image-preview" id="quiz-image-preview" style="display:none;">
+                                <button class="btn btn-danger btn-remove-file"><i class="ti ti-trash"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="prompt-addons">
+                            <label for="text-quiz-addon" data-key="quiz-addon-label">تێبینی زیاتر بۆ یارییەکە:</label>
+                            <div class="input-with-mic">
+                                <textarea id="text-quiz-addon" placeholder="بۆ نموونە: ١٠ پرسیاری قورس دروست بکە..." rows="2"></textarea>
+                                <button class="btn-mic" type="button" title="Voice Input"><i class="ti ti-microphone"></i></button>
+                            </div>
+                        </div>
+
+                        <button id="btn-generate-quiz" class="btn btn-primary btn-action">
+                            <i class="ti ti-sparkles"></i>
+                            <span data-key="btn-quiz">دروستکردنی یاری</span>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Tab: Career -->
+                <section id="tab-career" class="tab-pane">
+                    <div class="pane-header">
+                        <h2 data-key="career-title">ڕێنماییکاری زانکۆ و پیشە</h2>
+                        <p data-key="career-desc">نمرەکانت و ئارەزووەکانت بنووسە بۆ ئەوەی باشترین کۆلێژت پێشنیار بکات.</p>
+                    </div>
+                    <div class="input-section">
+                        <div class="prompt-addons">
+                            <label for="text-career-addon" data-key="career-addon-label">زانیارییەکانت بنووسە یان بە دەنگ بیڵێ:</label>
+                            <div class="input-with-mic">
+                                <textarea id="text-career-addon" placeholder="بۆ نموونە: من قوتابی پۆلی ١٢ی زانستیم، نمرەم ٩٠یە و حەزم لە کۆمپیوتەرە..." rows="4"></textarea>
+                                <button class="btn-mic" type="button" title="Voice Input"><i class="ti ti-microphone"></i></button>
+                            </div>
+                        </div>
+
+                        <button id="btn-generate-career" class="btn btn-primary btn-action">
+                            <i class="ti ti-compass"></i>
+                            <span data-key="btn-career">وەرگرتنی ڕێنمایی</span>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Tab: Code -->
+                <section id="tab-code" class="tab-pane">
+                    <div class="pane-header">
+                        <h2 data-key="code-title">یاریدەدەری کۆد (Programming Helper)</h2>
+                        <p data-key="code-desc">کۆدەکانت لێرە دابنێ بۆ ئەوەی هەڵەکانی بۆت چاک بکات یان بۆت ڕوون بکاتەوە.</p>
+                    </div>
+                    <div class="input-section">
+                        <div class="prompt-addons">
+                            <label for="text-code-addon" data-key="code-addon-label">کۆدەکەت یان پرسیارەکەت بنووسە:</label>
+                            <div class="input-with-mic">
+                                <textarea id="text-code-addon" placeholder="بۆ نموونە: ئەم کۆدەی Python هەڵەی تێدایە چۆن چاکی بکەم..." rows="4"></textarea>
+                                <button class="btn-mic" type="button" title="Voice Input"><i class="ti ti-microphone"></i></button>
+                            </div>
+                        </div>
+
+                        <button id="btn-generate-code" class="btn btn-primary btn-action">
+                            <i class="ti ti-code"></i>
+                            <span data-key="btn-code">شیکارکردنی کۆد</span>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Tab: Info / Guide -->
+                <section id="tab-info" class="tab-pane">
+                    <div class="pane-header">
+                        <h2 data-key="info-title">ڕێنمایی بەکارهێنانی سیستەمەکە</h2>
+                        <p data-key="info-desc">چۆن باشترین ئەنجام بەدەست بهێنم؟</p>
+                    </div>
+
+                    <div class="info-grid">
+                        <div class="info-card">
+                            <div class="info-icon"><i class="ti ti-key"></i></div>
+                            <h3 data-key="info-card1-title">کلیلی Gemini API</h3>
+                            <p data-key="info-card1-desc">سیستەمەکە پێویستی بە کلیلێکی فەرمی Gemini هەیە کە بە خۆڕایی بەدەست دێت. کلیلی خۆت لە بەشی ڕێکخستنەکان بنووسە. کلیلی تۆ لای ئێمە خەزن ناکرێت و تەنها لە مۆبایلەکەت یان کۆمپیوتەرەکەتدا دەمێنێتەوە.</p>
+                        </div>
+                        <div class="info-card">
+                            <div class="info-icon"><i class="ti ti-camera"></i></div>
+                            <h3 data-key="info-card2-title">وێنەی ڕوون بنێرە</h3>
+                            <p data-key="info-card2-desc">کاتێک وێنەی لاپەڕەیەکی کتێب یان پرسیارەکانی تاقیکردنەوە دەگریت، دڵنیابە کە ڕووناکییەکەی باشە و نووسینەکان بە ئاسانی دەخوێندرێنەوە بۆ ئەوەی ژیری دەستکرد باشترین شیکاری پێشکەش بکات.</p>
+                        </div>
+                        <div class="info-card">
+                            <div class="info-icon"><i class="ti ti-language"></i></div>
+                            <h3 data-key="info-card3-title">پشتگیری فرەزمان</h3>
+                            <p data-key="info-card3-desc">دەتوانیت بە زمانی کوردی، عەرەبی یان ئینگلیزی پرسیار بکەیت. ژیری دەستکرد بە هەمان ئەو زمانە وەڵامت دەداتەوە کە تۆ دەتەوێت.</p>
+                        </div>
+                        <div class="info-card">
+                            <div class="info-icon"><i class="ti ti-shield-check"></i></div>
+                            <h3 data-key="info-card4-title">خۆڕایی و سەلامەت</h3>
+                            <p data-key="info-card4-desc">ئەم ماڵپەڕە بە تەواوی سەلامەتە و دڵنیایی دەدات کە هیچ زانیارییەکت بۆ هیچ لایەنێکی تر نانێردرێت جگە لە خودی کۆمپانیای گووگڵ.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Results Output Card -->
+                <section class="results-wrapper hidden" id="results-wrapper">
+                    <div class="result-header">
+                        <div class="result-title">
+                            <i class="ti ti-brain"></i>
+                            <h3 data-key="result-heading">ئەنجامی شیکردنەوە</h3>
+                        </div>
+                        <div class="result-actions">
+                            <button id="btn-speak-result" class="btn-icon-action" title="Listen">
+                                <i class="ti ti-volume"></i>
+                            </button>
+                            <button id="btn-download-result" class="btn-icon-action" title="Download as Text">
+                                <i class="ti ti-download"></i>
+                            </button>
+                            <button id="btn-copy-result" class="btn-icon-action" title="Copy">
+                                <i class="ti ti-copy"></i>
+                            </button>
+                            <button id="btn-print-result" class="btn-icon-action" title="Print">
+                                <i class="ti ti-printer"></i>
+                            </button>
+                            <button id="btn-clear-result" class="btn-icon-action" title="Clear">
+                                <i class="ti ti-refresh"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Loader (hidden by default) -->
+                    <div class="result-loader hidden" id="result-loader">
+                        <div class="spinner">
+                            <div class="double-bounce1"></div>
+                            <div class="double-bounce2"></div>
+                        </div>
+                        <p id="loader-message" data-key="loader-msg">ژیری دەستکرد خەریکی بیرکردنەوە و شیکارکردنی فایلەکەیە...</p>
+                    </div>
+
+                    <!-- Output Content -->
+                    <div class="result-body" id="result-body">
+                        <!-- Content generated dynamically -->
+                    </div>
+
+                    <!-- Chat Input Area -->
+                    <div class="chat-input-container hidden" id="chat-input-container">
+                        <div class="input-with-mic" style="flex: 1;">
+                            <textarea id="chat-input-msg" rows="1" placeholder="پرسیاری زیاتر بکە..." data-key="chat-placeholder"></textarea>
+                            <button class="btn-mic" type="button" title="Voice Input"><i class="ti ti-microphone"></i></button>
+                        </div>
+                        <button id="btn-send-chat" class="btn-chat-send" title="Send">
+                            <i class="ti ti-send"></i>
+                        </button>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- API Key Settings Modal -->
+    <div class="modal-overlay" id="settings-modal">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3><i class="ti ti-key"></i> <span data-key="modal-title">ڕێکخستنی کلیلی Gemini API</span></h3>
+                <button class="close-modal" id="btn-close-modal"><i class="ti ti-x"></i></button>
+            </div>
+            <div class="modal-body">
+                <p data-key="modal-desc">بۆ بەکارهێنانی ئەم بەرنامەیە پێویستە کلیلێکی خۆڕایی Gemini API بەدەستبهێنیت و لێرەدا پەیستی بکەیت:</p>
+                
+                <div class="form-group">
+                    <label for="gemini-api-key">API Key:</label>
+                    <div class="input-with-icon">
+                        <i class="ti ti-key"></i>
+                        <input type="password" id="gemini-api-key" placeholder="AIzaSy...">
+                        <button type="button" id="btn-toggle-key-visibility" class="btn-toggle-visibility">
+                            <i class="ti ti-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="help-box">
+                    <h4 data-key="modal-help-title">چۆن کلیلەکە بەدەست بهێنم؟</h4>
+                    <ol>
+                        <li><span data-key="modal-help-step1">سەردانی ماڵپەڕی</span> <a href="https://aistudio.google.com/" target="_blank" rel="noopener">Google AI Studio <i class="ti ti-external-link"></i></a> <span data-key="modal-help-step1-2">بکە.</span></li>
+                        <li data-key="modal-help-step2">بە هەژماری Google (Gmail) خۆت بچۆ ژوورەوە.</li>
+                        <li data-key="modal-help-step3">کلیك بکە لەسەر دوگمەی "Get API Key" و پاشان یەکێک دروست بکە.</li>
+                        <li data-key="modal-help-step4">کۆپی بکە و لێرە پەیستی بکە.</li>
+                    </ol>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="btn-cancel-settings" data-key="modal-cancel">پاشگەزبوونەوە</button>
+                <button class="btn btn-primary" id="btn-save-settings" data-key="modal-save">خەزنکردن</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="toast hidden"></div>
+
+    <!-- Scripts -->
+    <script src="app.js"></script>
+</body>
+</html>
